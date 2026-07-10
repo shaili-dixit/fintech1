@@ -307,6 +307,7 @@ body {
   margin: 0 8px;
 
 }
+
 /* ===========================
    ACCOUNT DETAILS
 =========================== */
@@ -317,7 +318,7 @@ display:flex;
 
 align-items:center;
 
-gap:10px;
+gap:12px;
 
 }
 
@@ -325,23 +326,29 @@ gap:10px;
 
 flex:1;
 
+min-width:0;
+
 }
 
 .toggle-password{
 
-padding:14px 18px;
+min-width:110px;
+
+padding:14px 16px;
 
 border:none;
 
-border-radius:10px;
+border-radius:12px;
 
 background:#2563eb;
 
 color:white;
 
-cursor:pointer;
+font-size:14px;
 
 font-weight:600;
+
+cursor:pointer;
 
 transition:.25s;
 
@@ -351,41 +358,43 @@ transition:.25s;
 
 background:#1d4ed8;
 
-}
-
-.button-group.between{
-
-justify-content:space-between;
-
-}
-
-.back-btn{
-
-background:#e2e8f0;
-
-color:#1e293b;
-
-border:none;
-
-padding:14px 30px;
-
-border-radius:12px;
-
-font-size:16px;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:.25s;
-
-}
-
-.back-btn:hover{
-
-background:#cbd5e1;
-
 transform:translateY(-2px);
+
+}
+
+.button-group.between {
+
+  justify-content: space-between;
+
+}
+
+.back-btn {
+
+  background: #e2e8f0;
+
+  color: #1e293b;
+
+  border: none;
+
+  padding: 14px 30px;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .25s;
+
+}
+
+.back-btn:hover {
+
+  background: #cbd5e1;
+
+  transform: translateY(-2px);
 
 }
 
@@ -393,89 +402,89 @@ transform:translateY(-2px);
    REVIEW PAGE
 =========================== */
 
-.review-container{
+.review-container {
 
-display:flex;
+  display: flex;
 
-flex-direction:column;
+  flex-direction: column;
 
-gap:18px;
+  gap: 18px;
 
-margin:30px 0;
-
-}
-
-.review-item{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:18px 20px;
-
-background:#f8fafc;
-
-border-radius:14px;
-
-border-left:5px solid #2563eb;
-
-transition:.25s;
+  margin: 30px 0;
 
 }
 
-.review-item:hover{
+.review-item {
 
-background:#eff6ff;
+  display: flex;
 
-transform:translateX(5px);
+  justify-content: space-between;
 
-}
+  align-items: center;
 
-.review-item span{
+  padding: 18px 20px;
 
-font-weight:600;
+  background: #f8fafc;
 
-color:#475569;
+  border-radius: 14px;
 
-}
+  border-left: 5px solid #2563eb;
 
-.review-item strong{
-
-color:#1e293b;
-
-font-size:16px;
+  transition: .25s;
 
 }
 
-.submit-btn{
+.review-item:hover {
 
-background:#16a34a;
+  background: #eff6ff;
 
-color:white;
-
-border:none;
-
-padding:14px 32px;
-
-border-radius:12px;
-
-font-size:16px;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:.25s;
+  transform: translateX(5px);
 
 }
 
-.submit-btn:hover{
+.review-item span {
 
-background:#15803d;
+  font-weight: 600;
 
-transform:translateY(-2px);
+  color: #475569;
+
+}
+
+.review-item strong {
+
+  color: #1e293b;
+
+  font-size: 16px;
+
+}
+
+.submit-btn {
+
+  background: #16a34a;
+
+  color: white;
+
+  border: none;
+
+  padding: 14px 32px;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .25s;
+
+}
+
+.submit-btn:hover {
+
+  background: #15803d;
+
+  transform: translateY(-2px);
 
 }
 
@@ -483,91 +492,261 @@ transform:translateY(-2px);
    SUCCESS PAGE
 =========================== */
 
-.success-card{
+.success-card {
 
-background:white;
+  background: white;
 
-padding:60px 40px;
+  padding: 60px 40px;
 
-border-radius:24px;
+  border-radius: 24px;
 
-box-shadow:0 12px 35px rgba(15,23,42,.08);
+  box-shadow: 0 12px 35px rgba(15, 23, 42, .08);
+
+  text-align: center;
+
+  animation: fade .4s ease;
+
+}
+
+.success-icon {
+
+  width: 110px;
+
+  height: 110px;
+
+  margin: auto;
+
+  margin-bottom: 25px;
+
+  background: #22c55e;
+
+  color: white;
+
+  font-size: 50px;
+
+  font-weight: bold;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  border-radius: 50%;
+
+  animation: pop .6s ease;
+
+}
+
+.success-card h1 {
+
+  font-size: 36px;
+
+  margin-bottom: 20px;
+
+  color: #16a34a;
+
+}
+
+.success-card p {
+
+  font-size: 17px;
+
+  line-height: 1.8;
+
+  color: #64748b;
+
+  margin-bottom: 35px;
+
+}
+
+@keyframes pop {
+
+  0% {
+
+    transform: scale(0);
+
+  }
+
+  70% {
+
+    transform: scale(1.1);
+
+  }
+
+  100% {
+
+    transform: scale(1);
+
+  }
+
+}
+
+/* ===========================
+   VALIDATION
+=========================== */
+
+.error-input {
+
+  border: 2px solid #ef4444 !important;
+
+  background: #fff7f7;
+
+}
+
+.error-text {
+
+  margin-top: 6px;
+
+  color: #ef4444;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  display: block;
+
+}
+
+.next-btn:disabled {
+
+  background: #94a3b8;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+
+}
+
+.next-btn:disabled:hover {
+
+  background: #94a3b8;
+
+  transform: none;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width:768px){
+
+.container{
+
+max-width:100%;
+
+}
+
+.card{
+
+padding:28px 22px;
+
+}
+
+.card h1{
+
+font-size:28px;
+
+}
+
+.subtitle{
+
+font-size:15px;
+
+}
+
+.password-field{
+
+flex-direction:column;
+
+align-items:stretch;
+
+}
+
+.toggle-password{
+
+width:100%;
+
+}
+
+.button-group{
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.button-group button{
+
+width:100%;
+
+}
+
+.progress-header{
+
+flex-direction:column;
+
+gap:10px;
 
 text-align:center;
 
-animation:fade .4s ease;
+}
 
 }
 
-.success-icon{
+@media (max-width:480px){
 
-width:110px;
+.app{
 
-height:110px;
-
-margin:auto;
-
-margin-bottom:25px;
-
-background:#22c55e;
-
-color:white;
-
-font-size:50px;
-
-font-weight:bold;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-border-radius:50%;
-
-animation:pop .6s ease;
+padding:20px 12px;
 
 }
 
-.success-card h1{
+.card{
 
-font-size:36px;
+padding:22px 18px;
 
-margin-bottom:20px;
-
-color:#16a34a;
+border-radius:16px;
 
 }
 
-.success-card p{
+.card h1{
 
-font-size:17px;
-
-line-height:1.8;
-
-color:#64748b;
-
-margin-bottom:35px;
+font-size:24px;
 
 }
 
-@keyframes pop{
+.input-group input{
 
-0%{
+padding:13px;
 
-transform:scale(0);
-
-}
-
-70%{
-
-transform:scale(1.1);
+font-size:15px;
 
 }
 
-100%{
+.progress-container{
 
-transform:scale(1);
+padding:20px;
+
+}
+
+.step{
+
+width:34px;
+
+height:34px;
+
+font-size:14px;
+
+}
+
+.line{
+
+margin:0 5px;
 
 }
 

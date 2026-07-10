@@ -2,15 +2,20 @@ import { useState } from "react";
 
 function AccountDetails({
   formData,
+  errors,
   handleChange,
   nextStep,
   prevStep,
 }) {
-
   const [showPassword, setShowPassword] = useState(false);
 
-  return (
+  const isValid =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) &&
+    formData.password.length >= 8 &&
+    formData.confirmPassword === formData.password &&
+    formData.confirmPassword !== "";
 
+  return (
     <div className="card">
 
       <h1>Account Details</h1>
@@ -25,12 +30,20 @@ function AccountDetails({
 
         <input
           type="email"
-          placeholder="Enter email address"
+          aria-label="Email Address"
+          placeholder="Enter your email"
           value={formData.email}
+          className={errors.email ? "error-input" : ""}
           onChange={(e) =>
             handleChange("email", e.target.value)
           }
         />
+
+        {errors.email && (
+          <small className="error-text">
+            {errors.email}
+          </small>
+        )}
 
       </div>
 
@@ -42,8 +55,10 @@ function AccountDetails({
 
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="Enter password"
+            aria-label="Password"
+            placeholder="Minimum 8 characters"
             value={formData.password}
+            className={errors.password ? "error-input" : ""}
             onChange={(e) =>
               handleChange("password", e.target.value)
             }
@@ -52,14 +67,21 @@ function AccountDetails({
           <button
             type="button"
             className="toggle-password"
+            aria-label="Toggle Password Visibility"
             onClick={() =>
               setShowPassword(!showPassword)
             }
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? "🙈 Hide" : "👁 Show"}
           </button>
 
         </div>
+
+        {errors.password && (
+          <small className="error-text">
+            {errors.password}
+          </small>
+        )}
 
       </div>
 
@@ -69,12 +91,20 @@ function AccountDetails({
 
         <input
           type={showPassword ? "text" : "password"}
-          placeholder="Confirm password"
+          aria-label="Confirm Password"
+          placeholder="Re-enter password"
           value={formData.confirmPassword}
+          className={errors.confirmPassword ? "error-input" : ""}
           onChange={(e) =>
             handleChange("confirmPassword", e.target.value)
           }
         />
+
+        {errors.confirmPassword && (
+          <small className="error-text">
+            {errors.confirmPassword}
+          </small>
+        )}
 
       </div>
 
@@ -89,6 +119,7 @@ function AccountDetails({
 
         <button
           className="next-btn"
+          disabled={!isValid}
           onClick={nextStep}
         >
           Next →
@@ -97,9 +128,7 @@ function AccountDetails({
       </div>
 
     </div>
-
   );
-
 }
 
 export default AccountDetails;
