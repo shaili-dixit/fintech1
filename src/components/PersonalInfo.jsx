@@ -1,18 +1,13 @@
-function PersonalInfo({
-  formData,
-  errors,
-  handleChange,
-  nextStep,
-}) {
+import { useFormContext } from "react-hook-form";
 
-  const isValid =
-    formData.firstName.trim().length >= 2 &&
-    formData.lastName.trim().length >= 2 &&
-    Number(formData.age) >= 18 &&
-    Number(formData.age) <= 100;
+function PersonalInfo({ nextStep, isValid }) {
+
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
-
     <div className="card">
 
       <h1>Personal Information</h1>
@@ -23,103 +18,82 @@ function PersonalInfo({
 
       <div className="input-group">
 
-        <label>First Name</label>
+        <label htmlFor="firstName">First Name</label>
 
         <input
+          id="firstName"
           type="text"
-          aria-label="First Name"
           placeholder="Enter first name"
-          value={formData.firstName}
+          aria-label="First Name"
           className={errors.firstName ? "error-input" : ""}
-          onChange={(e)=>
-            handleChange("firstName",e.target.value)
-          }
+          {...register("firstName")}
         />
 
-        {errors.firstName &&
-
+        {errors.firstName && (
           <small className="error-text">
-
-            {errors.firstName}
-
+            {errors.firstName.message}
           </small>
-
-        }
+        )}
 
       </div>
 
       <div className="input-group">
 
-        <label>Last Name</label>
+        <label htmlFor="lastName">Last Name</label>
 
         <input
+          id="lastName"
           type="text"
-          aria-label="Last Name"
           placeholder="Enter last name"
-          value={formData.lastName}
+          aria-label="Last Name"
           className={errors.lastName ? "error-input" : ""}
-          onChange={(e)=>
-            handleChange("lastName",e.target.value)
-          }
+          {...register("lastName")}
         />
 
-        {errors.lastName &&
-
+        {errors.lastName && (
           <small className="error-text">
-
-            {errors.lastName}
-
+            {errors.lastName.message}
           </small>
-
-        }
+        )}
 
       </div>
 
       <div className="input-group">
 
-        <label>Age</label>
+        <label htmlFor="age">Age</label>
 
         <input
+          id="age"
           type="number"
-          aria-label="Age"
           placeholder="Enter age"
-          value={formData.age}
+          aria-label="Age"
           className={errors.age ? "error-input" : ""}
-          onChange={(e)=>
-            handleChange("age",e.target.value)
-          }
+          {...register("age")}
         />
 
-        {errors.age &&
-
+        {errors.age && (
           <small className="error-text">
-
-            {errors.age}
-
+            {errors.age.message}
           </small>
-
-        }
+        )}
 
       </div>
 
       <div className="button-group">
 
         <button
+          type="button"
           className="next-btn"
           disabled={!isValid}
           onClick={nextStep}
         >
-
           Next →
-
         </button>
 
       </div>
 
     </div>
-
   );
-
 }
 
 export default PersonalInfo;

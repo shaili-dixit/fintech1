@@ -1,5 +1,5 @@
 function Review({
-  formData,
+  data,
   prevStep,
   handleSubmit,
 }) {
@@ -17,28 +17,43 @@ function Review({
       <div className="review-container">
 
         <div className="review-item">
+
           <span>First Name</span>
-          <strong>{formData.firstName}</strong>
+
+          <strong>{data.firstName}</strong>
+
         </div>
 
         <div className="review-item">
+
           <span>Last Name</span>
-          <strong>{formData.lastName}</strong>
+
+          <strong>{data.lastName}</strong>
+
         </div>
 
         <div className="review-item">
+
           <span>Age</span>
-          <strong>{formData.age}</strong>
+
+          <strong>{data.age}</strong>
+
         </div>
 
         <div className="review-item">
+
           <span>Email</span>
-          <strong>{formData.email}</strong>
+
+          <strong>{data.email}</strong>
+
         </div>
 
         <div className="review-item">
+
           <span>Password</span>
-          <strong>{"•".repeat(formData.password.length)}</strong>
+
+          <strong>{"•".repeat(data.password?.length || 0)}</strong>
+
         </div>
 
       </div>
@@ -46,6 +61,7 @@ function Review({
       <div className="button-group between">
 
         <button
+          type="button"
           className="back-btn"
           onClick={prevStep}
         >
@@ -53,6 +69,7 @@ function Review({
         </button>
 
         <button
+          type="button"
           className="submit-btn"
           onClick={handleSubmit}
         >

@@ -1,4 +1,11 @@
 import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import {
+  personalInfoSchema,
+  accountDetailsSchema,
+} from "./validationSchema";
 
 import ProgressBar from "./components/ProgressBar";
 import PersonalInfo from "./components/PersonalInfo";
@@ -12,102 +19,67 @@ function App() {
 
   const [step, setStep] = useState(1);
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    age: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+  const [submittedData, setSubmittedData] = useState(null);
+
+  const schema =
+    step === 1
+      ? personalInfoSchema
+      : accountDetailsSchema;
+
+  const methods = useForm({
+    resolver: zodResolver(schema),
+    mode: "onChange",
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      age: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
 
-  const [errors, setErrors] = useState({});
+  const {
 
-  const validateField = (name, value) => {
+    trigger,
 
-    let error = "";
+    getValues,
 
-    switch (name) {
+    handleSubmit,
 
-      case "firstName":
-        if (value.trim().length < 2)
-          error = "First name must be at least 2 characters.";
-        break;
+    formState: { isValid },
 
-      case "lastName":
-        if (value.trim().length < 2)
-          error = "Last name must be at least 2 characters.";
-        break;
+  } = methods;
 
-      case "age":
-        if (!value || value < 18 || value > 100)
-          error = "Age must be between 18 and 100.";
-        break;
+  const nextStep = async () => {
 
-      case "email":
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
-          error = "Enter a valid email address.";
-        break;
+    const valid = await trigger();
 
-      case "password":
-        if (value.length < 8)
-          error = "Password must contain at least 8 characters.";
-        break;
+    if (valid) {
 
-      case "confirmPassword":
-        if (value !== formData.password)
-          error = "Passwords do not match.";
-        break;
+      setStep((prev) => prev + 1);
 
-      default:
-        break;
-    }
-
-    setErrors((prev) => ({
-      ...prev,
-      [name]: error,
-    }));
-
-    return error === "";
-
-  };
-
-  const handleChange = (field, value) => {
-
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-
-    validateField(field, value);
-
-  };
-
-  const nextStep = () => {
-
-    if (step < 3) {
-      setStep(step + 1);
     }
 
   };
 
   const prevStep = () => {
 
-    if (step > 1) {
-      setStep(step - 1);
-    }
+    setStep((prev) => prev - 1);
 
   };
 
-  const handleSubmit = () => {
+  const onSubmit = (data) => {
 
     console.log("Final Submitted Data");
 
-    console.log(formData);
+    console.log(data);
 
     console.log(
       "[Analytics] User interacted with Multi Step Onboarding Wizard"
     );
+
+    setSubmittedData(data);
 
     setStep(4);
 
@@ -121,40 +93,55 @@ function App() {
 
         {step <= 3 && <ProgressBar step={step} />}
 
-        {step === 1 && (
+        <FormProvider {...methods}>
 
-          <PersonalInfo
-            formData={formData}
-            errors={errors}
-            handleChange={handleChange}
-            nextStep={nextStep}
-          />
+          {step === 1 && (
 
-        )}
+            <PersonalInfo
 
-        {step === 2 && (
+              nextStep={nextStep}
 
-          <AccountDetails
-            formData={formData}
-            errors={errors}
-            handleChange={handleChange}
-            nextStep={nextStep}
-            prevStep={prevStep}
-          />
+              isValid={isValid}
 
-        )}
+            />
 
-        {step === 3 && (
+          )}
 
-          <Review
-            formData={formData}
-            prevStep={prevStep}
-            handleSubmit={handleSubmit}
-          />
+          {step === 2 && (
 
-        )}
+            <AccountDetails
 
-        {step === 4 && <Success />}
+              nextStep={nextStep}
+
+              prevStep={prevStep}
+
+              isValid={isValid}
+
+            />
+
+          )}
+
+          {step === 3 && (
+
+            <Review
+
+              data={getValues()}
+
+              prevStep={prevStep}
+
+              handleSubmit={handleSubmit(onSubmit)}
+
+            />
+
+          )}
+
+        </FormProvider>
+
+        {step === 4 &&
+
+          <Success data={submittedData} />
+
+        }
 
       </div>
 

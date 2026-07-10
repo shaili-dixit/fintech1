@@ -1,21 +1,21 @@
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 function AccountDetails({
-  formData,
-  errors,
-  handleChange,
   nextStep,
   prevStep,
+  isValid,
 }) {
+
   const [showPassword, setShowPassword] = useState(false);
 
-  const isValid =
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) &&
-    formData.password.length >= 8 &&
-    formData.confirmPassword === formData.password &&
-    formData.confirmPassword !== "";
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
+
     <div className="card">
 
       <h1>Account Details</h1>
@@ -26,42 +26,48 @@ function AccountDetails({
 
       <div className="input-group">
 
-        <label>Email Address</label>
+        <label htmlFor="email">
+          Email Address
+        </label>
 
         <input
+          id="email"
           type="email"
-          aria-label="Email Address"
           placeholder="Enter your email"
-          value={formData.email}
+          aria-label="Email Address"
           className={errors.email ? "error-input" : ""}
-          onChange={(e) =>
-            handleChange("email", e.target.value)
-          }
+          {...register("email")}
         />
 
         {errors.email && (
+
           <small className="error-text">
-            {errors.email}
+
+            {errors.email.message}
+
           </small>
+
         )}
 
       </div>
 
       <div className="input-group">
 
-        <label>Password</label>
+        <label htmlFor="password">
+
+          Password
+
+        </label>
 
         <div className="password-field">
 
           <input
+            id="password"
             type={showPassword ? "text" : "password"}
-            aria-label="Password"
             placeholder="Minimum 8 characters"
-            value={formData.password}
+            aria-label="Password"
             className={errors.password ? "error-input" : ""}
-            onChange={(e) =>
-              handleChange("password", e.target.value)
-            }
+            {...register("password")}
           />
 
           <button
@@ -72,38 +78,52 @@ function AccountDetails({
               setShowPassword(!showPassword)
             }
           >
+
             {showPassword ? "🙈 Hide" : "👁 Show"}
+
           </button>
 
         </div>
 
         {errors.password && (
+
           <small className="error-text">
-            {errors.password}
+
+            {errors.password.message}
+
           </small>
+
         )}
 
       </div>
 
       <div className="input-group">
 
-        <label>Confirm Password</label>
+        <label htmlFor="confirmPassword">
+
+          Confirm Password
+
+        </label>
 
         <input
+          id="confirmPassword"
           type={showPassword ? "text" : "password"}
+          placeholder="Re-enter Password"
           aria-label="Confirm Password"
-          placeholder="Re-enter password"
-          value={formData.confirmPassword}
-          className={errors.confirmPassword ? "error-input" : ""}
-          onChange={(e) =>
-            handleChange("confirmPassword", e.target.value)
+          className={
+            errors.confirmPassword ? "error-input" : ""
           }
+          {...register("confirmPassword")}
         />
 
         {errors.confirmPassword && (
+
           <small className="error-text">
-            {errors.confirmPassword}
+
+            {errors.confirmPassword.message}
+
           </small>
+
         )}
 
       </div>
@@ -111,24 +131,32 @@ function AccountDetails({
       <div className="button-group between">
 
         <button
+          type="button"
           className="back-btn"
           onClick={prevStep}
         >
+
           ← Back
+
         </button>
 
         <button
+          type="button"
           className="next-btn"
           disabled={!isValid}
           onClick={nextStep}
         >
+
           Next →
+
         </button>
 
       </div>
 
     </div>
+
   );
+
 }
 
 export default AccountDetails;
