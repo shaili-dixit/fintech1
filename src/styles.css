@@ -307,3 +307,174 @@ body {
   margin: 0 8px;
 
 }
+/* ===========================
+   ACCOUNT DETAILS
+=========================== */
+
+.password-field{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+.password-field input{
+
+flex:1;
+
+}
+
+.toggle-password{
+
+padding:14px 18px;
+
+border:none;
+
+border-radius:10px;
+
+background:#2563eb;
+
+color:white;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:.25s;
+
+}
+
+.toggle-password:hover{
+
+background:#1d4ed8;
+
+}
+
+.button-group.between{
+
+justify-content:space-between;
+
+}
+
+.back-btn{
+
+background:#e2e8f0;
+
+color:#1e293b;
+
+border:none;
+
+padding:14px 30px;
+
+border-radius:12px;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.back-btn:hover{
+
+background:#cbd5e1;
+
+transform:translateY(-2px);
+
+}
+
+/* ===========================
+   REVIEW PAGE
+=========================== */
+
+.review-container{
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+
+margin:30px 0;
+
+}
+
+.review-item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:18px 20px;
+
+background:#f8fafc;
+
+border-radius:14px;
+
+border-left:5px solid #2563eb;
+
+transition:.25s;
+
+}
+
+.review-item:hover{
+
+background:#eff6ff;
+
+transform:translateX(5px);
+
+}
+
+.review-item span{
+
+font-weight:600;
+
+color:#475569;
+
+}
+
+.review-item strong{
+
+color:#1e293b;
+
+font-size:16px;
+
+}
+
+.submit-btn{
+
+background:#16a34a;
+
+color:white;
+
+border:none;
+
+padding:14px 32px;
+
+border-radius:12px;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.submit-btn:hover{
+
+background:#15803d;
+
+transform:translateY(-2px);
+
+}

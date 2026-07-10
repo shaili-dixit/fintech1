@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import ProgressBar from "./components/ProgressBar";
 import PersonalInfo from "./components/PersonalInfo";
-//import AccountDetails from "./components/AccountDetails";
-//import Review from "./components/Review";
-//import Success from "./components/Success";
+import AccountDetails from "./components/AccountDetails";
+import Review from "./components/Review";
+import Success from "./components/Success";
 
 import "./styles.css";
 
